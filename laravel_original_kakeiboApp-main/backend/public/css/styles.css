@@ -1,0 +1,71 @@
+@charset "UTF-8";
+@import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css");
+body {
+  font-family: "ヒラギノ丸ゴ Pro W4", "ヒラギノ丸ゴ Pro", "Hiragino Maru Gothic Pro", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "HG丸ｺﾞｼｯｸM-PRO", "HGMaruGothicMPRO";
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+/*
+.navbar {
+  margin: 2rem 0 2.5rem 0;
+}
+
+.my-navbar {
+  align-items: center;
+  background: #333;
+  display: flex;
+  height: 6rem;
+  justify-content: space-between;
+  padding: 0 2%;
+  margin-bottom: 3rem;
+}
+
+.my-navbar-brand {
+  font-size: 18px;
+}
+
+.my-navbar-brand,
+.my-navbar-item {
+  color: #8c8c8c;
+}
+
+.my-navbar-brand:hover,
+a.my-navbar-item:hover {
+  color: #ffffff;
+}
+
+.table td:nth-child(2),
+.table td:nth-child(3),
+.table td:nth-child(4) {
+  white-space: nowrap;
+  width: 1px;
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+  background-color: #fff;
+} */
+table.table tr td {
+  vertical-align: middle;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-top: 20px;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2b2b2b), to(#4d4d4d));
+  background-image: linear-gradient(#2b2b2b 0%, #4d4d4d 100%);
+}
+/*# sourceMappingURL=styles.css.map */
