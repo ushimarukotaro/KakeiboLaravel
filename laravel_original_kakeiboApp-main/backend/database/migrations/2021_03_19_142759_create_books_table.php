@@ -24,6 +24,9 @@ class CreateBooksTable extends Migration
             $table->integer('amount');
             $table->integer('delflag')->default(0);
             $table->timestamps();
+
+            // 外部キーを設定
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
