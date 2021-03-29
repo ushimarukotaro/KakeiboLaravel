@@ -17,36 +17,38 @@ class BooksTableSeeder extends Seeder
         //
         Book::create([
             'user_id' => 1,
-            'category_id' => 1,
+            // 'category_id' => 1,
             'content' => '出演費',
             'year' => 2021,
             'month' => 3,
             'date' => 12,
             'inout' => 1,
             'amount' => 30000,
+            'memo' => 'これを最低にしたい',
             'delflag' => 0,
             ]);
         Book::create([
             'user_id' => 2,
-            'category_id' => 2,
+            // 'category_id' => 2,
             'content' => '電気代',
             'year' => 2021,
             'month' => 3,
             'date' => 24,
             'inout' => 2,
             'amount' => 8000,
-            'delflag' => 0,
+            'memo' => 'ちょっと使いすぎた',
+            // 'delflag' => 0,
             ]);
         Book::create([
             'user_id' => 1,
-            'category_id' => 1,
+            // 'category_id' => 1,
             'content' => '衣装代',
             'year' => 2021,
             'month' => 1,
             'date' => 13,
             'inout' => 2,
             'amount' => 12000,
-            'delflag' => 0,
+            // 'delflag' => 0,
             ]);
     }
 }

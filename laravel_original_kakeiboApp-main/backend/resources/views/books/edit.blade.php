@@ -1,20 +1,21 @@
 @extends('layouts.layouts')
 
 @section('content')
-    <h3 class="text-center">家計簿データ新規作成</h3>
+    <h3 class="text-center">家計簿データ編集</h3>
     <div class="row">
-        <form method="POST" action="/books">
+        <form method="POST" action="/books/{{ $book->id }}">
             @csrf
+            @method('PATCH')
             <div class="form-group">
                 <label>年度</label>
-                <input type="number" name="year" class="form-control">
+                <input type="number" name="year" class="form-control" value="{{ $book->year }}">
             </div>
             <div class="form-group">
                 <label>月</label>
                 <select class="form-control" name="month" style="width: 40%;">
                     <option selected disabled>--</option>
                     @for($i=1;$i<=12;$i++)
-                    <option value={{$i}}>{{$i}}</option>
+                    <option value={{$i}} {{ $book->month == $i ? 'selected' : '' }}>{{$i}}</option>
                     @endfor
                 </select>
             </div>
@@ -24,7 +25,7 @@
                 <select class="form-control" name="date" style="width: 40%;">
                     <option selected disabled>--</option>
                     @for($i=1;$i<=31;$i++)
-                    <option value={{$i}}>{{$i}}</option>
+                    <option value={{$i}} {{ $book->date == $i ? 'selected' : '' }}>{{$i}}</option>
                     @endfor
                 </select>
             </div>
@@ -34,11 +35,11 @@
                 </div>
                 <div class=" form-inline  btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="mr-4">
-                        <input type="radio" id="inout1" name="inout" autocomplete="off" value="1" checked class="form-check-input">
+                        <input type="radio" id="inout1" name="inout" autocomplete="off" value="1" class="form-check-input" {{ $book->inout == 1 ? 'checked' : ''}}>
                         収入
                     </label>
                     <label>
-                        <input type="radio" name="inout" id="inout2" autocomplete="off" value="2" class="form-check-input">
+                        <input type="radio" name="inout" id="inout2" autocomplete="off" value="2" class="form-check-input" {{ $book->inout == 2 ? 'checked' : ''}}>
                         支出
                     </label>
                 </div>
@@ -47,28 +48,22 @@
                 <label>カテゴリー</label>
                 <select class="form-control" style="width: 40%;" name="category_id">
                     <option selected disabled>----</option>
-                    {{-- <option value="1">光熱費</option>
-                    <option value="2">家賃</option>
-                    <option value="3">給料</option>
-                    <option value="4">副業</option>
-                    <option value="5">雑費</option>
-                    <option value="6">食費</option> --}}
                     @foreach (App\Models\Category::$categories as $key => $category)
-                    <option value="{{ $key }}">{{ $category }}</option>
+                    <option value="{{ $book->category_id }}" {{$book->category_id == $key ? 'selected' : '' }} >{{ $category }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label>内容</label>
-                <input type="text" name="content" class="form-control" placeholder="弁当代、本代 etc...">
+                <input type="text" name="content" class="form-control" value="{{ $book->content }}">
             </div>
             <div class="form-group mb-5">
                 <label for="product-name">金額</label>
-                <input type="number" name="amount" id="product-name" class="form-control">
+                <input type="number" name="amount" id="product-name" class="form-control" value="{{ $book->amount }}">
             </div>
             <div class="form-group mb-5">
                 <label>メモ</label>
-                <input type="text" name="memo" class="form-control">
+                <input type="text" name="memo" class="form-control" value="{{ $book->memo }}">
             </div>
             <button type="submit" class="btn btn-primary btn mr-5">送信</button>
             <a href="{{ route('books.index') }}" class="btn btn-secondary">戻る</a>

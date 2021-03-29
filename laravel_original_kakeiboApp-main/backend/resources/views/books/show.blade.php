@@ -24,6 +24,10 @@
         <th>金額</th>
         <td>¥{{ number_format($book->amount) }}</td>
     </tr>
+    <tr>
+        <th>メモ</th>
+        <td>{{ $book->memo }}</td>
+    </tr>
 </table>
 
 <a href="{{ route('books.index') }}" class="btn btn-primary">戻る</a>

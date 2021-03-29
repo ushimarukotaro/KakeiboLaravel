@@ -15,7 +15,7 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable(); //　nullableは後で消す
             $table->integer('category_id');
             $table->string('content');
             $table->integer('year');
@@ -26,7 +26,7 @@ class CreateBooksTable extends Migration
             $table->timestamps();
 
             // 外部キーを設定
-            $table->foreign('category_id')->references('id')->on('categories');
+            // $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
