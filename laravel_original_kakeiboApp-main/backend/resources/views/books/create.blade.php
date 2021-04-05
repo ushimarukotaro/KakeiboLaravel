@@ -32,7 +32,7 @@
                 <div>
                     <label>収支区分</label>
                 </div>
-                <div class=" form-inline  btn-group btn-group-toggle" data-toggle="buttons">
+                <div class=" form-inline  btn-group">
                     <label class="mr-4">
                         <input type="radio" id="inout1" name="inout" autocomplete="off" value="1" checked class="form-check-input">
                         収入
@@ -47,12 +47,6 @@
                 <label>カテゴリー</label>
                 <select class="form-control" style="width: 40%;" name="category_id">
                     <option selected disabled>----</option>
-                    {{-- <option value="1">光熱費</option>
-                    <option value="2">家賃</option>
-                    <option value="3">給料</option>
-                    <option value="4">副業</option>
-                    <option value="5">雑費</option>
-                    <option value="6">食費</option> --}}
                     @foreach (App\Models\Category::$categories as $key => $category)
                     <option value="{{ $key }}">{{ $category }}</option>
                     @endforeach
@@ -60,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label>内容</label>
-                <input type="text" name="content" class="form-control" placeholder="弁当代、本代 etc...">
+                <input type="text" name="content" class="form-control">
             </div>
             <div class="form-group mb-5">
                 <label for="product-name">金額</label>

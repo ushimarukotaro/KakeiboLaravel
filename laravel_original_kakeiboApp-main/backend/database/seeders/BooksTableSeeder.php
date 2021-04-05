@@ -17,7 +17,7 @@ class BooksTableSeeder extends Seeder
         //
         Book::create([
             'user_id' => 1,
-            // 'category_id' => 1,
+            'category_id' => 1,
             'content' => '出演費',
             'year' => 2021,
             'month' => 3,
@@ -29,7 +29,7 @@ class BooksTableSeeder extends Seeder
             ]);
         Book::create([
             'user_id' => 2,
-            // 'category_id' => 2,
+            'category_id' => 2,
             'content' => '電気代',
             'year' => 2021,
             'month' => 3,
@@ -41,13 +41,24 @@ class BooksTableSeeder extends Seeder
             ]);
         Book::create([
             'user_id' => 1,
-            // 'category_id' => 1,
+            'category_id' => 1,
             'content' => '衣装代',
             'year' => 2021,
             'month' => 1,
             'date' => 13,
             'inout' => 2,
             'amount' => 12000,
+            // 'delflag' => 0,
+            ]);
+        Book::create([
+            'user_id' => 3,
+            'category_id' => 1,
+            'content' => 'お菓子代',
+            'year' => 2021,
+            'month' => 3,
+            'date' => 13,
+            'inout' => 2,
+            'amount' => 1000,
             // 'delflag' => 0,
             ]);
     }

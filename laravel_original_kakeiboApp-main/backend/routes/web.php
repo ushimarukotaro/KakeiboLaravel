@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,16 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::resource('books','BookController');
-// Route::get('/books', 'BookController@index')->name('books.index');
-// Route::get('/books/{book}', 'BookController@show')->name('books.show');
-// Route::get('/books/create', 'BookController@create')->name('books.create');
-// Route::get('/books/edit/{book}', 'BookController@edit')->name('books.edit');
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('books','BookController');
+    Route::post('/books/{book}/delete', 'BookController@delete')->name('books.delete');
+    Route::get('/books/trash', 'BookController@trash')->name('books.trash');
+    // Route::get('/books', 'BookController@index')->name('books.index');
+    // Route::get('/books/{book}', 'BookController@show')->name('books.show');
+    // Route::get('/books/create', 'BookController@create')->name('books.create');
+    // Route::get('/books/edit/{book}', 'BookController@edit')->name('books.edit');
+});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
