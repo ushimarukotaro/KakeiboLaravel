@@ -7,20 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>家計簿アプリ</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
-        integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
-    {{-- <link rel="stylesheet" href="/css/styles.css"> --}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css"> --}}
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -32,10 +30,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <form class="form-inline my-2 my-lg-0" action="{{ route('books.search') }}">
-                <input class="form-control form-control-sm mr-sm-2" type="keyword" placeholder="ワード検索" value=""
-                    aria-label="Search">
-                <button class="btn btn-outline-success btn-sm my-sm-0" type="submit"><i
-                        class="fas fa-search"></i></button>
+                <input class="form-control form-control-sm mr-sm-2" type="text" name="keyword" placeholder="ワード検索" value="{{isset($_GET['keyword']) ? $_GET['keyword'] : ''}}" aria-label="Search">
+                <button class="btn btn-outline-success btn-sm my-sm-0" type="submit"><i class="fas fa-search"></i></button>
             </form>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
@@ -46,7 +42,7 @@
                                 {{ Auth::user()->name }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">マイページ</a>
+                                <a class="dropdown-item" href="/user">マイページ</a>
                                 <a class="dropdown-item" href="{{ route('books.create') }}">新規作成</a>
                                 <a class="dropdown-item" href="{{ route('books.trash') }}">ゴミ箱を見る</a>
                                 <div class="dropdown-divider"></div>
@@ -77,7 +73,6 @@
         <p class="footer-p" style="color:#b6b6b6;">copyright USHIMARU 2021</p>
     </footer>
     <script src="{{ asset('js/app.js') }}"></script>
-
 
 </body>
 

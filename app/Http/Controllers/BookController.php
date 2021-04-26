@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CreateBook;
 
 class BookController extends Controller
 {
-    //
+
     private function checkMyData(Book $book)
     {
         if ($book->user_id != Auth::user()->id) {
-            return redirect()->route('books.index');
+            abort(403);
         }
     }
 
@@ -25,7 +26,8 @@ class BookController extends Controller
     public function index()
     {
         // bookテーブルに入っているデータを全部取ってくる
-        $books = Auth::user()->books;
+        $books = Book::query()->where('user_id', '=', Auth::user()->id)->where('delflag', '=', 0)->orderBy('id', 'desc')
+            ->paginate(8);
 
         return view('books.index', [
             'books' => $books,
@@ -34,10 +36,8 @@ class BookController extends Controller
 
     public function show(Book $book)
     {
-        if ($book->user_id != Auth::user()->id) {
-            return redirect()->route('books.index');
-        }
-        // $this->checkMyData($book);
+        $this->checkMyData($book);
+
         return view('books.show', compact('book'));
     }
 
@@ -46,7 +46,7 @@ class BookController extends Controller
         return view('books.create');
     }
 
-    public function store(Request $request)
+    public function store(CreateBook $request)
     {
 
         $book = new Book();
@@ -59,19 +59,13 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        if ($book->user_id != Auth::user()->id) {
-            return redirect()->route('books.index');
-        }
-        // $this->checkMyData($book);
+        $this->checkMyData($book);
         return view('books.edit', compact('book'));
     }
 
-    public function update(Request $request, Book $book)
+    public function update(CreateBook $request, Book $book)
     {
-        // $this->checkMyData($book);
-        if ($book->user_id != Auth::user()->id) {
-            return redirect()->route('books.index');
-        }
+        $this->checkMyData($book);
 
         $book->fill($request->all());
 
@@ -83,10 +77,7 @@ class BookController extends Controller
 
     public function delete(Request $request, Book $book)
     {
-        // $this->checkMyData($book);
-        if ($book->user_id != Auth::user()->id) {
-            return redirect()->route('books.index');
-        }
+        $this->checkMyData($book);
 
         $book->delflag = $request->input('delflag');
         $book->save();
@@ -97,10 +88,7 @@ class BookController extends Controller
     //　ゴミ箱から復元する
     public function restore(Request $request, Book $book)
     {
-        // $this->checkMyData($book);
-        if ($book->user_id != Auth::user()->id) {
-            return redirect()->route('books.index');
-        }
+        $this->checkMyData($book);
 
         $book->delflag = $request->input('delflag');
         $book->save();
@@ -110,10 +98,7 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
-        // $this->checkMyData($book);
-        if ($book->user_id != Auth::user()->id) {
-            return redirect()->route('books.index');
-        }
+        $this->checkMyData($book);
 
         $book->delete();
 
@@ -124,8 +109,8 @@ class BookController extends Controller
     {
 
         // bookテーブルに入っているデータを全部取ってくる
-        $books = Auth::user()->books;
-        // $books = Book::all();
+        $books = Book::query()->where('user_id', '=', Auth::user()->id)->where('delflag', '=', 1)->orderBy('id', 'desc')
+            ->paginate(8);
 
         return view('books.trash', [
             'books' => $books,
@@ -133,22 +118,39 @@ class BookController extends Controller
     }
 
     //　検索機能
-    public function search(Request $rq)
+    public function search(Request $request, Book $book)
     {
+
         //キーワード受け取り
-        $keyword = $rq->input('keyword');
+        $keyword = $request->input('keyword');
 
         //クエリ生成
-        $query = \App\Models\Book::query();
+        $query = Book::query();
 
         //もしキーワードがあったら
         if (!empty($keyword)) {
-            $query->where('content', '%' . $keyword . '%');
-            // ->orWhere('name', 'like', '%' . $keyword . '%');
+            $query->where('content', 'like', '%' . $keyword . '%')
+                ->where('user_id', '=', Auth::user()->id)
+                ->where('delflag', '=', 0);
         }
-
         //ページネーション
-        $books = $query->orderBy('id', 'desc')->paginate(10);
+        $books = $query->orderBy('id', 'desc')->paginate(8);
         return view('books.search')->with('books', $books)->with('keyword', $keyword);
+    }
+
+
+    public function monthly(Request $request, Book $book) {
+        $year = $request->input('year');
+        $month = $request->input('month');
+
+        $books = Book::query()->where('user_id', '=', Auth::user()->id)
+        ->where('year', '=', $year)->where('month', '=', $month)
+        ->where('delflag', '=', 0)
+        ->orderBy('id', 'desc')
+        ->paginate(8);
+
+    return view('books.index', [
+        'books' => $books,
+    ]);
     }
 }

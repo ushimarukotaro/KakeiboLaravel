@@ -1,4 +1,17 @@
-(function() {
+//　テーブルソート
+$(document).ready(function () {
+    $("#books-table").tablesorter({
+        textExtraction: function(node){
+            var attr = $(node).attr('data-value');
+            if(typeof attr !== 'undefined' && attr !== false){
+                return attr;
+            }
+            return $(node).text();
+        }
+        });
+});
+
+(function () {
     // ライブラリ
     /**
      * 任意の年が閏年であるかをチェックする
@@ -66,7 +79,9 @@
     });
 
     // ロード時
-    createOption('year', 2016, thisYear, thisYear);
+    createOption('year', 2020, thisYear, thisYear);
     createOption('month', 1, 12, thisMonth);
     createOption('date', 1, datesOfYear[thisMonth - 1], thisDate);
 })();
+
+

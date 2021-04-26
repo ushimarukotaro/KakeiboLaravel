@@ -3,8 +3,9 @@
 
 @section('content')
     <h3 class="text-center">ゴミ箱</h3>
+    @if (count($books) > 0)
     <div class="table-responsive mt-5">
-        <table class="table table-striped">
+        <table id="books-table" class="card-table table table-striped tablesorter">
             <thead>
                 <tr class="bg-gradient text-white rounded-top">
                     <th>日付</th>
@@ -12,11 +13,12 @@
                     <th>カテゴリ</th>
                     <th>内容</th>
                     <th>金額</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th data-sorter="false"></th>
+                    <th data-sorter="false"></th>
+                    <th data-sorter="false"></th>
                 </tr>
             </thead>
+            <tbody id="tbody">
             @foreach ($books as $book)
             @if($book->delflag == 1)
                 <tr>
@@ -48,7 +50,15 @@
                 </tr>
                 @endif
             @endforeach
+            </tbody>
         </table>
     </div>
+    @else
+    <div class="text-center my-4">
+        <img src="/images/gomibako_empty.png" alt="" class="image">
+        <p class="py-4">ゴミ箱の中身は空です</p>
+        <a href="{{ route('books.index') }}" class="btn btn-default">一覧に戻る</a>
+    </div>
+    @endif
 
 @endsection

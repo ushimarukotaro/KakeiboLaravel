@@ -58,7 +58,6 @@ a.my-navbar-item:hover {
 }
 
 table.table {
-    // margin: 50px 0;
     margin-bottom: 0;
     .bg-primary th {
         color: #fff;
@@ -69,7 +68,7 @@ table.table {
 }
 
 
-form {
+form.form {
     margin: 24px auto;
     width: 50%;
     &.register-form {
@@ -115,4 +114,58 @@ html {
 
 .bg-gradient {
     background-image: $bg-image;
+}
+
+//　テーブルそーたー
+.tablesorter th{
+    position: relative;
+    cursor: pointer;
+    text-align: left;
+}
+.tablesorter th::before, .tablesorter th::after{
+    content: '';
+    position: absolute;
+    z-index: 2;
+    right: 7px;
+    width: 0;
+    height: 0;
+    border: 4px dashed;
+    border-color: #fff transparent;
+    pointer-events: none;
+}
+.tablesorter th::before{
+    border-bottom-style: solid;
+    border-top: none;
+    top: 30%;
+}
+.tablesorter th::after{
+    border-top-style: solid;
+    border-bottom: none;
+    bottom: 30%;
+}
+.tablesorter th.tablesorter-headerAsc:after{
+    border: none;
+}
+.tablesorter th.tablesorter-headerAsc:before{
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.tablesorter th.tablesorter-headerDesc:before{
+    border: none;
+}
+.tablesorter th.tablesorter-headerDesc:after{
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.tablesorter th.sorter-false:before, .tablesorter th.sorter-false:after{
+    border: none;
+}
+
+
+.image {
+    width: 250px;
+    height: auto;
+    object-fit: cover;
 }

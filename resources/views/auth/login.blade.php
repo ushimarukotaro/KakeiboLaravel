@@ -11,11 +11,11 @@
                     <form method="POST" action="{{ route('login') }}" class="register-form">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row mt-4">
                             <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 mt-4 offset-md-4">
                                 <div class="form-check">
-                                    <a href="{{ ('/register')}}" class="btn btn-secondary">アカウント新規作成</a>
+                                    <a href="{{ ('/register')}}" class="btn btn-light">アカウント新規作成</a>
                             </div>
                         </div>
                     </form>
