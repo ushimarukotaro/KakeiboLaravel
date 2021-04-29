@@ -29,7 +29,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <form class="form-inline my-2 my-lg-0" action="{{ route('books.search') }}">
+            <form class="form-inline my-2 my-lg-0" action="{{ route('books.search') }}" style="flex-flow: nowrap;">
                 <input class="form-control form-control-sm mr-sm-2" type="text" name="keyword" placeholder="ワード検索" value="{{isset($_GET['keyword']) ? $_GET['keyword'] : ''}}" aria-label="Search">
                 <button class="btn btn-outline-success btn-sm my-sm-0" type="submit"><i class="fas fa-search"></i></button>
             </form>

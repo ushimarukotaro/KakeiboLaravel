@@ -5,7 +5,9 @@
 
         <div class="column col-md-10 mt-4 mx-auto">
             {{-- {!! $books->render() !!} --}}
+            @if($keyword)
             {!! $books->appends(['keyword' => $keyword])->render() !!}
+            @endif
             <div class="table-responsive card">
                 <div class="card-header">
                     検索ワード　：　<span

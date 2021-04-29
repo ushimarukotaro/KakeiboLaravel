@@ -3,7 +3,7 @@
 @section('content')
     <h3 class="text-center">家計簿</h3>
     @if (isset($_POST['year']) && isset($_POST['month']))
-    <h5 class="text-center py-2">{{$_POST['year']}} 年 {{$_POST['month']}} 月  家計簿一覧</h5>
+        <h5 class="text-center py-2">{{ $_POST['year'] }} 年 {{ $_POST['month'] }} 月 家計簿一覧</h5>
     @endif
     <div class="row">
         <div class="col col-md-4 mt-4">
@@ -13,43 +13,78 @@
                     <a href="{{ route('books.create') }}" class="btn btn-outline-success btn-block">
                         <i class="fas fa-plus"></i>　新規作成
                     </a>
-                    <form method="POST" action="{{ route('books.monthly') }}">
-                        @csrf
-                        <div class="form-inline py-2">
-                            @if (isset($_POST['year']))
-                            <select name="year" class="form-control form-select-sm ml-4"
-                                aria-label=".form-select-sm example">
-                                <option value="{{date('Y')-1}}" {{$_POST['year'] == date('Y')-1 ? 'selected' : ''}}>{{date('Y')-1}}</option>
-                                <option value="{{date('Y')}}" {{$_POST['year'] == date('Y') ? 'selected' : ''}}>{{date('Y')}}</option>
-                            </select><label class="mx-1" for="year">年</label>
-                            @else
-                            <select name="year" class="form-control form-select-sm ml-4"
-                                aria-label=".form-select-sm example">
-                                <option value="{{date('Y')-1}}">{{date('Y')-1}}</option>
-                                <option value="{{date('Y')}}" selected>{{date('Y')}}</option>
-                            </select><label class="mx-1" for="year">年</label>
-                            @endif
-                            @if (isset($_POST['month']))
-                            <select name="month" class="form-control form-select-sm"
-                                aria-label=".form-select-sm example">
-                                @for($i = 1;$i <= 12;$i++)
-                                <option value="{{$i}}" {{isset($_POST['month']) && $i == $_POST['month'] ? 'selected' : ''}} >{{$i}}</option>
-                                @endfor
-                            </select>
-                            <label class="mx-1" for="month">月</label>
-                            @else
-                            <select name="month" class="form-control form-select-sm"
-                                aria-label=".form-select-sm example">
-                                @for($i = 1;$i <= 12;$i++)
-                                <option value="{{$i}}" {{$i == date('m') ? 'selected' : ''}} >{{$i}}</option>
-                                @endfor
-                            @endif
-                            </select>
-                        </div>
-                        <button class="btn btn-light btn-block">送信</button>
+                    <div class="row">
+                        <form method="POST" action="{{ route('books.monthly') }}" class="mx-auto">
+                            @csrf
+                            <div class="form-inline py-2" style="flex-flow: nowrap;">
+                                @if (isset($_POST['year']))
+                                    <select name="year" class="form-control form-select-sm"
+                                        aria-label=".form-select-sm example">
+                                        <option value="{{ date('Y') - 1 }}"
+                                            {{ $_POST['year'] == date('Y') - 1 ? 'selected' : '' }}>{{ date('Y') - 1 }}
+                                        </option>
+                                        <option value="{{ date('Y') }}"
+                                            {{ $_POST['year'] == date('Y') ? 'selected' : '' }}>{{ date('Y') }}
+                                        </option>
+                                    </select><label class="mx-1" for="year">年</label>
+                                @else
+                                    <select name="year" class="form-control form-select-sm"
+                                        aria-label=".form-select-sm example">
+                                        <option value="{{ date('Y') - 1 }}">{{ date('Y') - 1 }}</option>
+                                        <option value="{{ date('Y') }}" selected>{{ date('Y') }}</option>
+                                    </select><label class="mx-1" for="year">年</label>
+                                @endif
+                                @if (isset($_POST['month']))
+                                    <select name="month" class="form-control form-select-sm"
+                                        aria-label=".form-select-sm example">
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            <option value="{{ $i }}"
+                                                {{ isset($_POST['month']) && $i == $_POST['month'] ? 'selected' : '' }}>
+                                                {{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <label class="mx-1" for="month">月</label>
+                                @else
+                                    <select name="month" class="form-control form-select-sm"
+                                        aria-label=".form-select-sm example">
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            <option value="{{ $i }}" {{ $i == date('m') ? 'selected' : '' }}>
+                                                {{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <label class="mx-1" for="month">月</label>
+                                @endif
+                            </div>
+                    </div>
+                    <button class="btn btn-light btn-block">送信</button>
                     </form>
                 </div>
             </nav>
+            @if(isset($_POST['year']) && isset($_POST['month']))
+            <div class="mt-4">
+                <div class="card">
+                    <div class="card-header">
+                    {{ $_POST['year'] }}年{{ $_POST['month'] }}月の金額
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center p-4">
+                            <div>収支計 :</div>
+                            <div>¥ {{ number_format($inSum) }}</div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center px-4 mb-2">
+                            <div>支出計 :</div>
+                            <div>¥ {{ number_format($outSum) }}</div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>合計 :</div>
+                            <div>¥ {{ number_format($inSum - $outSum) }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         </div>
         <div class="column col-md-8 mt-4 ml-auto">
             <div class="table-responsive card mb-3">
