@@ -34,6 +34,7 @@
             <a href="{{ route('books.index') }}" class="btn btn-primary mr-4">戻る</a>
             <a href="{{ route('books.edit', ['book' => $book->id]) }}" class="btn btn-success">編集</a>
         </div>
+        @if ($book->delflag == 0)
         <div class="delete-area">
             <form method="POST" action="/books/{{ $book->id }}/delete" style="display:inline;">
                 @csrf
@@ -41,6 +42,7 @@
                 <button class="btn btn-dark" onclick="return confirm('ゴミ箱に移動しますか？');"><i class="fas fa-trash-alt"></i>ゴミ箱へ</button>
             </form>
         </div>
+        @endif
     </div>
 
 @endsection

@@ -79,15 +79,12 @@
                             <a href="{{ route('books.index') }}" class="btn btn-secondary">戻る</a>
                     </form>
                     <div class="delete-area">
-
                         <form method="POST" action="/books/{{ $book->id }}/delete" style="display:inline;">
                             @csrf
                             <input type="hidden" name="delflag" value="1">
                             <button class="btn btn-dark" onclick="return confirm('ゴミ箱に移動しますか？');"><i
                                     class="fas fa-trash-alt"></i>ゴミ箱へ</button>
                         </form>
-
-                    </div>
                 </div>
             </div>
         </div>
