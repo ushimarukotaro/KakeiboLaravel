@@ -5,18 +5,15 @@
     @if (isset($_POST['year']) && isset($_POST['month']))
         <h5 class="text-center py-2">{{ $_POST['year'] }} 年 {{ $_POST['month'] }} 月 家計簿一覧</h5>
     @endif
-    <div class="row">
+    <div class="row index_font">
         <div class="col col-md-4 mt-4">
             <nav class="card">
                 <div class="card-header bg-gradient text-light">月毎に表示</div>
                 <div class="card-body">
-                    <a href="{{ route('books.create') }}" class="btn btn-outline-success btn-block">
-                        <i class="fas fa-plus"></i>　新規作成
-                    </a>
                     <div class="row">
                         <form method="POST" action="{{ route('books.monthly') }}" class="mx-auto">
                             @csrf
-                            <div class="form-inline py-2" style="flex-flow: nowrap;">
+                            <div class="form-inline py-4" style="flex-flow: nowrap;">
                                 @if (isset($_POST['year']))
                                     <select name="year" class="form-control form-select-sm"
                                         aria-label=".form-select-sm example">
@@ -54,36 +51,39 @@
                                     </select>
                                     <label class="mx-1" for="month">月</label>
                                 @endif
+                                <button class="btn btn-outline-secondary btn-block">表示</button>
                             </div>
                     </div>
-                    <button class="btn btn-light btn-block">送信</button>
+                    <a href="{{ route('books.create') }}" class="btn btn-outline-success btn-block">
+                        <i class="fas fa-plus"></i>　新規作成
+                    </a>
                     </form>
                 </div>
             </nav>
-            @if(isset($_POST['year']) && isset($_POST['month']))
-            <div class="mt-4">
-                <div class="card">
-                    <div class="card-header">
-                    {{ $_POST['year'] }}年{{ $_POST['month'] }}月の金額
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center p-4">
-                            <div>収支計 :</div>
-                            <div>¥ {{ number_format($inSum) }}</div>
+            @if (isset($_POST['year']) && isset($_POST['month']))
+                <div class="mt-4">
+                    <div class="card">
+                        <div class="card-header">
+                            {{ $_POST['year'] }}年{{ $_POST['month'] }}月の収支合計
                         </div>
-                        <div class="d-flex justify-content-between align-items-center px-4 mb-2">
-                            <div>支出計 :</div>
-                            <div>¥ {{ number_format($outSum) }}</div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center p-4">
+                                <div>収入計 :</div>
+                                <div>¥ {{ number_format($inSum) }}</div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center px-4 mb-2">
+                                <div>支出計 :</div>
+                                <div style="color:red;">-  ¥ {{ number_format($outSum) }}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>合計 :</div>
-                            <div>¥ {{ number_format($inSum - $outSum) }}</div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>合計 :</div>
+                                <div>¥ {{ number_format($inSum - $outSum) }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endif
         </div>
         <div class="column col-md-8 mt-4 ml-auto">
@@ -93,7 +93,8 @@
                         <thead>
                             <tr class="card-header bg-gradient text-white">
                                 <th>日付</th>
-                                <th>カテゴリ</th>
+                                <th>収支　</th>
+                                <th>カテゴリ </th>
                                 <th>内容</th>
                                 <th>金額</th>
                                 <th data-sorter="false"></th>
@@ -105,9 +106,10 @@
                             @foreach ($books as $book)
                                 <tr>
                                     <td>{{ $book->year }}/{{ $book->month }}/{{ $book->date }}</td>
+                                    <td>{{ $book->inout == 1 ? '収入' : '支出' }}</td>
                                     <td>{{ $book->category->category_name }}</td>
                                     <td>{{ $book->content }}</td>
-                                    <td>¥{{ number_format($book->amount) }}</td>
+                                    <td style="{{ $book->inout == 1 ? '' : 'color:red;' }}">{{ $book->inout == 1 ? '+ ' : '- ' }}¥ {{ number_format($book->amount) }}</td>
                                     <td>
                                         <a href="{{ route('books.show', ['book' => $book->id]) }}"
                                             class="btn btn-primary btn-sm">詳細</a>
