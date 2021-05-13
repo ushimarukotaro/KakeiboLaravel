@@ -15,18 +15,21 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id')->unsigned(); //　nullableは後で消す
-            $table->integer('category_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable(); //　nullableは後で消す
+            $table->bigInteger('category_id')->unsigned();
             $table->string('content');
             $table->integer('year');
             $table->integer('month');
+            $table->integer('date');
             $table->integer('inout'); //収支
             $table->integer('amount');
+            $table->string('memo', 50)->nullable();
             $table->integer('delflag')->default(0);
             $table->timestamps();
 
             // 外部キーを設定
-            $table->foreign('category_id')->references('id')->on('categories');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

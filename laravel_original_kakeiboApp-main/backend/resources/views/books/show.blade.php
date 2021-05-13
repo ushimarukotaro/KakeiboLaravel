@@ -3,10 +3,10 @@
 @section('content')
 
     <h3>家計簿詳細</h3>
-    <table class="table table-striped">
+    <table class="table table-striped col-md-10 mx-auto my-5 show-table">
         <tr>
-            <th>年月</th>
-            <td>{{ $book->year }}年{{ $book->month }}月{{ $book->date }}日</td>
+            <th class="th">年月</th>
+            <td>{{ $book->year }} 年 {{$book->month}} 月 {{ $book->date }} 日</td>
         </tr>
         <tr>
             <th>区分</th>
@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <th>カテゴリー</th>
-            <td>{{ $book->category_id }}</td>
+            <td>{{ $book->category->category_name }}</td>
         </tr>
         <tr>
             <th>内容</th>
@@ -34,6 +34,7 @@
             <a href="{{ route('books.index') }}" class="btn btn-primary mr-4">戻る</a>
             <a href="{{ route('books.edit', ['book' => $book->id]) }}" class="btn btn-success">編集</a>
         </div>
+        @if ($book->delflag == 0)
         <div class="delete-area">
             <form method="POST" action="/books/{{ $book->id }}/delete" style="display:inline;">
                 @csrf
@@ -41,6 +42,7 @@
                 <button class="btn btn-dark" onclick="return confirm('ゴミ箱に移動しますか？');"><i class="fas fa-trash-alt"></i>ゴミ箱へ</button>
             </form>
         </div>
+        @endif
     </div>
 
 @endsection

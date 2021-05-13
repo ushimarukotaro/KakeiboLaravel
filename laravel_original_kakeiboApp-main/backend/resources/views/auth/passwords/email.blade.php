@@ -10,11 +10,11 @@
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            あなたのメールアドレスにパスワード再設定のメールを送信しました！
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('password.email') }}" class="register-form">
+                    <form method="POST" action="{{ route('password.email') }}" class="py-4 my-2">
                         @csrf
 
                         <div class="form-group row">

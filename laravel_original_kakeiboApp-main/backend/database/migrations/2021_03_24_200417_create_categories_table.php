@@ -19,7 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
 
             // 外部キーを設定
-            // $table->foreign('category_id')->references('id')->on('books');
+            // $table->foreign('id')->references('category_id')->on('books');
         });
     }
 

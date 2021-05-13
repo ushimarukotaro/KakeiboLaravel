@@ -19,4 +19,8 @@ class Category extends Model
         8 => '副業',
         9 => '臨時収入',
     ];
+
+    public function book() {
+        return $this->hasMany('App\Models\Book');
+    }
 }

@@ -33,7 +33,7 @@ class BooksTableSeeder extends Seeder
             'content' => '電気代',
             'year' => 2021,
             'month' => 3,
-            'date' => 24,
+            'date' => 4,
             'inout' => 2,
             'amount' => 8000,
             'memo' => 'ちょっと使いすぎた',
@@ -45,9 +45,10 @@ class BooksTableSeeder extends Seeder
             'content' => '衣装代',
             'year' => 2021,
             'month' => 1,
-            'date' => 13,
+            'date' => 17,
             'inout' => 2,
             'amount' => 12000,
+            'memo' => 'もう一着欲しい',
             // 'delflag' => 0,
             ]);
         Book::create([
@@ -59,6 +60,7 @@ class BooksTableSeeder extends Seeder
             'date' => 13,
             'inout' => 2,
             'amount' => 1000,
+            'memo' => '程よい',
             // 'delflag' => 0,
             ]);
     }
