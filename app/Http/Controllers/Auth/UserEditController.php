@@ -10,7 +10,7 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UpdateEmailRequest;
 use App\Http\Requests\WithdrawalRequest;
 use UserEdit_Operation_DB;
-// use App\Http\Models\User;
+use App\Http\Models\User;
 
 class UserEditController extends Controller
 {
