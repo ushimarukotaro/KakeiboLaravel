@@ -31,7 +31,7 @@
                                 <div class="form-group row mt-4">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">ユーザー名変更</label>
                                     <div class="col-md-6">
-                                        <input id="name" name="Name" value="{{ Auth::user()->name }}"
+                                        <input id="name" name="Name" value="{{ $auth['name'] }}"
                                             class="form-control @error('Name') is-invalid @enderror">
                                     </div>
                                 </div>
