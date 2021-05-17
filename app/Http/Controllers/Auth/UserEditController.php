@@ -33,6 +33,7 @@ class UserEditController extends Controller
         //登録メールアドレスを更新するメソッド
         $this->checkLogin();
         $UserEdit_Operation_DB = new UserEdit_Operation_DB();
+        ddd($UserEdit_Operation_DB);
         return $UserEdit_Operation_DB->EmailUpdate($request);
     }
 
