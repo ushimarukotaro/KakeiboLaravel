@@ -1,7 +1,6 @@
 <?php
 
-// namespace App\Http\Controllers\Auth;
-namespace Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +10,6 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UpdateEmailRequest;
 use App\Http\Requests\WithdrawalRequest;
 use UserEdit_Operation_DB;
-// use App\Models\User;
 
 class UserEditController extends Controller
 {
