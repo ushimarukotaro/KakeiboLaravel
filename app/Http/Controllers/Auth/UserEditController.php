@@ -16,9 +16,9 @@ class UserEditController extends Controller
 {
     private function checkLogin(){
         //ログインの有無をチェック
-        if (!Auth::check()) {
-            return \App::abort(404);
-        }
+        // if (!Auth::check()) {
+        //     return \App::abort(404);
+        // }
     }
 
 
