@@ -26,7 +26,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="POST" action="/user/edit/email">
+                            {{-- <form method="POST" action="/user/edit/name">
                                 @csrf
                                 <div class="form-group row mt-4">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">ユーザー名変更</label>
@@ -35,6 +35,11 @@
                                             class="form-control @error('Name') is-invalid @enderror">
                                     </div>
                                 </div>
+                                <input type="hidden" name="UserId" value={{ $auth['id'] }}>
+                                <button dusk="view-button" class="btn btn-primary">ユーザー名変更</button>
+                            </form> --}}
+                            <form method="POST" action="/user/edit/email">
+                                @csrf
                                 <div class="form-group row mt-4">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">email変更</label>
                                     <div class="col-md-6">
