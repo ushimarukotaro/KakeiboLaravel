@@ -28,13 +28,6 @@ class UserEditController extends Controller
     return view('auth.UserEdit',['auth'=>$auth]);
     }
 
-    public function userNameUpdate(Request $request){
-        //登録メールアドレスを更新するメソッド
-        $this->checkLogin();
-        $UserEdit_Operation_DB = new UserEdit_Operation_DB();
-        return $UserEdit_Operation_DB->EmailUpdate($request);
-    }
-
     public function EmailUpdate(UpdateEmailRequest $request){
         //登録メールアドレスを更新するメソッド
         $this->checkLogin();
