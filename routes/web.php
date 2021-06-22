@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    return redirect('/books');
 });
+
 
 Route::group(['middleware' => 'auth'], function () {
 

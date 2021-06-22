@@ -139,24 +139,25 @@ class BookController extends Controller
     }
 
 
-    public function monthly(Request $request, Book $book) {
+    public function monthly(Request $request, Book $book)
+    {
         $year = $request->input('year');
         $month = $request->input('month');
 
         $books = Book::query()->where('user_id', '=', Auth::user()->id)
-        ->where('year', '=', $year)->where('month', '=', $month)
-        ->where('delflag', '=', 0)
-        ->orderBy('id', 'desc')
-        ->paginate(8);
+            ->where('year', '=', $year)->where('month', '=', $month)
+            ->where('delflag', '=', 0)
+            ->orderBy('id', 'desc')
+            ->paginate(8);
 
-        $inSum = Book::where('inout',1)->where('user_id', Auth::user()->id)->where('year', '=', $year)->where('month', '=', $month)->where('delflag', 0)->sum('amount');
-        $outSum = Book::where('inout',2)->where('user_id', Auth::user()->id)->where('year', '=', $year)->where('month', '=', $month)->where('delflag', 0)->sum('amount');
+        $inSum = Book::where('inout', 1)->where('user_id', Auth::user()->id)->where('year', '=', $year)->where('month', '=', $month)->where('delflag', 0)->sum('amount');
+        $outSum = Book::where('inout', 2)->where('user_id', Auth::user()->id)->where('year', '=', $year)->where('month', '=', $month)->where('delflag', 0)->sum('amount');
 
-    return view('books.index', [
-        'books' => $books,
-    ])->with([
-        'inSum' => $inSum,
-        'outSum' => $outSum,
-    ]);
+        return view('books.index', [
+            'books' => $books,
+        ])->with([
+            'inSum' => $inSum,
+            'outSum' => $outSum,
+        ]);
     }
 }
