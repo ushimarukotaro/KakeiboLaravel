@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('/login');
+    return redirect('/books');
 });
+
 
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/user', 'Auth\UserEditController@UserEditForm');
+    // Route::post('/user/edit/name', 'Auth\UserEditController@EmailUpdate');
     Route::post('/user/edit/email', 'Auth\UserEditController@EmailUpdate');
     Route::post('/user/edit/password', 'Auth\UserEditController@PasswordChange');
     Route::get('/user/edit/delete', 'Auth\UserEditController@WithdrawalForm');

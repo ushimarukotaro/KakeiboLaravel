@@ -27,7 +27,7 @@ class UpdateEmailRequest extends FormRequest
     public function rules()
     {
         return [
-            'Name' => ['required', 'string', 'max:20'],
+            // 'Name' => ['required', 'string', 'max:20'],
             'Email' => 'required|email|max:100',
         ];
     }
@@ -35,7 +35,7 @@ class UpdateEmailRequest extends FormRequest
     public function attributes()
     {
         return [
-            'Name' => '名前',
+            // 'Name' => '名前',
             'Email' => 'メールアドレス',
         ];
     }

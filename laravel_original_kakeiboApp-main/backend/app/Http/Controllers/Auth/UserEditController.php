@@ -17,7 +17,7 @@ class UserEditController extends Controller
         //ログインの有無をチェック
         if (!Auth::check()) {
             return \App::abort(404);
-        }        
+        }
     }
 
 
@@ -27,14 +27,14 @@ class UserEditController extends Controller
     $this->checkLogin();
     return view('auth.UserEdit',['auth'=>$auth]);
     }
-    
+
     public function EmailUpdate(UpdateEmailRequest $request){
         //登録メールアドレスを更新するメソッド
         $this->checkLogin();
         $UserEdit_Operation_DB = new UserEdit_Operation_DB();
         return $UserEdit_Operation_DB->EmailUpdate($request);
-    }    
-    
+    }
+
     public function PasswordChange(ChangePasswordRequest $request){
         //パスワードを変更するメソッド
         $this->checkLogin();

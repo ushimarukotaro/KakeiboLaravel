@@ -90,8 +90,8 @@
             <div class="table-responsive card mb-3">
                 @if (count($books) > 0)
                     <table id="books-table" class="card-table table table-striped tablesorter">
-                        <thead>
-                            <tr class="card-header bg-gradient text-white">
+                        <thead class=" card-header bg-gradient">
+                            <tr class="text-white">
                                 <th>日付</th>
                                 <th>収支　</th>
                                 <th>カテゴリ </th>
